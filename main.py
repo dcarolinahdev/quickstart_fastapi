@@ -84,12 +84,14 @@ def show_person(
         None,
         min_length=1,
         max_length=50,
+        example="Susana",
         title="Person name",
         description="This is the person name. It's between 1 and 50 characters"
         ),
     # age: str = Query(...)
     age: Optional[int] = Query(
         0,
+        example=25,
         title="Person age",
         description="This is the person age"
         )
@@ -103,6 +105,7 @@ def show_person(
     person_id: int = Path(
         ...,
         gt=0,
+        example=18,
         title="Person id",
         description="This is the person id in db"
         )
@@ -116,6 +119,7 @@ def update_person(
     person_id: int = Path(
         ...,
         gt=0,
+        example=26,
         title="Person ID",
         description="This is the person ID"
     ),
