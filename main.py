@@ -102,9 +102,24 @@ def home():
     path='/person/new',
     response_model=PersonOut,
     status_code=status.HTTP_201_CREATED,
-    tags=['Persons']
+    tags=['Persons'],
+    summary="Create person in the app"
 )
 def create_person(person: Person = Body(...)):
+    """
+    *Create person*
+
+    This path operation creates a person in the app and save the information in database.
+
+    Parameters:
+    - Request body parameter:
+        - **person: Person**:
+            A person model with firstname, lastname, age, hair color and marital status.
+
+    Returns:
+    - **person model**:
+        A person model with firstname, lastname, age, hair color and marital status.
+    """
     return person
 
 # Validations: Query Parameters
@@ -112,7 +127,8 @@ def create_person(person: Person = Body(...)):
 @app.get(
     path='/person/detail',
     status_code=status.HTTP_200_OK,
-    tags=['Persons']
+    tags=['Persons'],
+    summary="Show person detail info in the app"
 )
 def show_person(
     name: Optional[str] = Query(
@@ -131,6 +147,22 @@ def show_person(
         description="This is the person age"
         )
 ):
+    """
+    *Show person*
+
+    This path operation show the main detail of a person .
+
+    Parameters:
+    - Request body parameter:
+        - **name: str**:
+            A name for person.
+        - **age: int**:
+            Age for person.
+
+    Returns:
+    - **python dict**:
+        A python dict with firstname and lastname as key and age as value.
+    """
     return {name: age}
 
 # Validations: Path Parameters
@@ -140,7 +172,8 @@ persons = [1, 2, 3, 4, 5]
 @app.get(
     path='/person/detail/{person_id}',
     status_code=status.HTTP_200_OK,
-    tags=['Persons']
+    tags=['Persons'],
+    summary="Show if person exists in the app"
 )
 def show_person(
     person_id: int = Path(
@@ -151,6 +184,20 @@ def show_person(
         description="This is the person id in db"
         )
 ):
+    """
+    *Show if person exists in db*
+
+    This path operation show if person exisst.
+
+    Parameters:
+    - Request body parameter:
+        - **person_id: int**:
+            Person identification in database.
+
+    Returns:
+    - **python dict**:
+        A python dict with identification in database as key and message as value.
+    """
     if person_id not in persons:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -163,7 +210,8 @@ def show_person(
 @app.put(
     path='/person/{person_id}',
     status_code=status.HTTP_201_CREATED,
-    tags=['Persons']
+    tags=['Persons'],
+    summary="Update a person in the app"
 )
 def update_person(
     person_id: int = Path(
@@ -176,6 +224,24 @@ def update_person(
     person: Person = Body(...),
     location: Location = Body(...)
 ):
+    """
+    *Updates a person in db*
+
+    This path operation updates a person data.
+
+    Parameters:
+    - Request body parameter:
+        - **person_id: int**:
+            Person identification in database.
+        - **person: Person**:
+            Person data as json info.
+        - **location: Location**:
+            Location data as json info.
+
+    Returns:
+    - **python dict**:
+        A person as a dict.
+    """
     results = person.dict()
     results.update(location.dict())
     return results
@@ -186,9 +252,26 @@ def update_person(
     path="/login",
     response_model=LoginOut,
     status_code=status.HTTP_200_OK,
-    tags=['Auth']
+    tags=['Auth'],
+    summary="Login in the app"
 )
 def login(username: str = Form(...), password: str = Form(...)):
+    """
+    *Login user in app*
+
+    This path operation login an user in app.
+
+    Parameters:
+    - Request body parameter:
+        - **username: str**:
+            Person username in db.
+        - **password: str**:
+            Person password in db.
+
+    Returns:
+    - **redirect to viewt**:
+        Redirect to future view
+    """
     return LoginOut(username=username)
 
 # Cookies and Headers parameters
@@ -196,7 +279,8 @@ def login(username: str = Form(...), password: str = Form(...)):
 @app.post(
     path='/contact',
     status_code=status.HTTP_200_OK,
-    tags=['Forms']
+    tags=['Forms'],
+    summary="Contact form"
 )
 def contact(
     first_name: str = Form(
@@ -217,17 +301,56 @@ def contact(
     user_agent: Optional[str] = Header(default=None),
     ads: Optional[str] = Cookie(default=None)
 ):
+    """
+    *Contact form*
+
+    This path operation send a message in contact form.
+
+    Parameters:
+    - Request body parameter:
+        - **firstname: str**:
+            Person firstname.
+        - **lastname: str**:
+            Person dlastname.
+        - **email: EmailStr**:
+            User email.
+        - **message: str**:
+            Message to send.
+        - **user_agent: str**:
+            User agent from header.
+        - **ads: str**:
+            Ads from cookies.
+
+    Returns:
+    - **user_agent**:
+        User agent.
+    """
     return user_agent
 
 # files
 
 @app.post(
     path='/post-image',
-    tags=['Forms']
+    tags=['Forms'],
+    summary="Send image in post"
 )
 def post_image(
     image: UploadFile = File(...)
 ):
+    """
+    *Post an image*
+
+    This path operation post an image.
+
+    Parameters:
+    - Request body parameter:
+        - **image: file**:
+            Image file.
+
+    Returns:
+    - **python dict**:
+        A dict with filename, format and size in kb.
+    """
     return {
         "filename": image.filename,
         "format": image.content_type,
