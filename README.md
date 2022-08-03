@@ -5,6 +5,8 @@
 ```
 fastapi 0.79.0
 uvicorn 0.18.2
+python-multipart 0.0.5
+email-validator 1.2.1
 
 OAS 3.0
 ```
