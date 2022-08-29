@@ -107,7 +107,7 @@ def home():
 )
 def create_person(person: Person = Body(...)):
     """
-    *Create person*
+    ***Create person***
 
     This path operation creates a person in the app and save the information in database.
 
@@ -148,7 +148,7 @@ def show_person(
         )
 ):
     """
-    *Show person*
+    ***Show person***
 
     This path operation show the main detail of a person .
 
@@ -185,7 +185,7 @@ def show_person(
         )
 ):
     """
-    *Show if person exists in db*
+    ***Show if person exists in db***
 
     This path operation show if person exisst.
 
@@ -225,7 +225,7 @@ def update_person(
     location: Location = Body(...)
 ):
     """
-    *Updates a person in db*
+    ***Updates a person in db***
 
     This path operation updates a person data.
 
@@ -257,7 +257,7 @@ def update_person(
 )
 def login(username: str = Form(...), password: str = Form(...)):
     """
-    *Login user in app*
+    ***Login user in app***
 
     This path operation login an user in app.
 
@@ -302,7 +302,7 @@ def contact(
     ads: Optional[str] = Cookie(default=None)
 ):
     """
-    *Contact form*
+    ***Contact form***
 
     This path operation send a message in contact form.
 
@@ -338,7 +338,7 @@ def post_image(
     image: UploadFile = File(...)
 ):
     """
-    *Post an image*
+    ***Post an image***
 
     This path operation post an image.
 
