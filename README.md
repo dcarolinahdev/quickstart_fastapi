@@ -1,5 +1,25 @@
 # Hello World in FastAPI
 
+---
+
+> ***v1.1*** - This is an initial project in a learning path, it includes topics as:
+
+*Some features*
+
+- The models, views and forms of this project are in the same file.
+
+- The project don't use a user interface other than documentation views, such as swagger or redoc.
+
+- It uses some very basic management of multimedia files.
+
+- It uses base authentication.
+
+- The project does not use any database.
+
+- Validations: Query and Path Parameters.
+
+- Some about cookies.
+
 ## Versions
 
 ```
